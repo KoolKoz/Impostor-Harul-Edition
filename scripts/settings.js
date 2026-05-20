@@ -81,7 +81,7 @@ export class Settings {
   }
 
   /**
-   * Toggles a category. Possible categories: 'People', 'Places', 'Things'.
+   * Toggles a category. Possible categories: 'People/Pets', 'Games', 'Places', 'Objects', 'Animals'.
    * @param {*} category
    */
   toggleCategory(category) {

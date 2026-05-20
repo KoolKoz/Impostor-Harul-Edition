@@ -1,5 +1,5 @@
 {
-    "people": [
+    "people/pets": [
         "Dana",
         "Sarah Molin",
         "Sara Chirla",
@@ -57,5 +57,19 @@
         "Downtown Hollywood",
         "Youth Room",
         "Cafeteria"
+    ],
+    "objects": [
+        "Axe",
+        "Knife",
+        ""
+    ],
+    "animals": [
+        "Dog",
+        "Cat",
+        "Hamster",
+        "Rabbit",
+        "Parrot",
+        "Tuna",
+        "Turtle"
     ]
 }
