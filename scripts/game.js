@@ -12,3 +12,5 @@ class Game {
     this.nonImpostors = [];
   }
 }
+
+function genGame(gameMode, selectedCategories) {}

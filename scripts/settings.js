@@ -6,10 +6,10 @@ import genId from './utils/id.js';
  * @class
  */
 export class Settings {
-  constructor(gameMode, selectedCategories = []) {
+  constructor(gameMode, selectedCategories, players) {
     this.gameMode = gameMode;
     this.selectedCategories = selectedCategories;
-    this.players = [];
+    this.players = players;
     this.impostorCount = 1; // Temporary default val; will be updated based on localStorage.
   }
 
@@ -79,4 +79,23 @@ export class Settings {
     this.gameMode = gameMode;
     return true;
   }
+
+  /**
+   * Toggles a category. Possible categories: 'People', 'Places', 'Things'.
+   * @param {*} category
+   */
+  toggleCategory(category) {
+    if (this.selectedCategories.includes(category)) {
+      this.selectedCategories = this.selectedCategories.filter(
+        (cat) => cat !== category,
+      );
+    } else {
+      this.selectedCategories.push(category);
+    }
+    return true;
+  }
+}
+
+function genSettings(gameMode, selectedCategories, players) {
+  return new Settings(gameMode, selectedCategories, players);
 }
