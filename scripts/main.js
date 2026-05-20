@@ -1,55 +1,17 @@
-import { Settings } from './settings.js';
+import { Settings, genSettings } from './settings.js';
+
+import { players, savePlayersToStorage } from '../data/players.js';
+import {
+  impostorCount,
+  saveImpostorCountToStorage,
+} from '../data/impostors.js';
+import { gameMode, savegameModeToStorage } from '../data/game-mode.js';
 
 //Debugging.
-const settings = new Settings(
-  'Word Game',
-  ['Animals', 'Food', 'Countries'],
-  [
-    { name: 'Player 1', id: '123' },
-    { name: 'Player 2', id: '456' },
-    { name: 'Player 3', id: '789' },
-  ],
+const settings = genSettings(
+  gameMode,
+  ['Animals', 'Food'],
+  players,
+  impostorCount,
 );
-console.log(settings);
-
-settings.addPlayer();
-console.log(settings);
-
-settings.addPlayer();
-console.log(settings);
-
-settings.editPlayerName(settings.players[0].id, 'John');
-console.log(settings);
-
-// settings.removePlayer(settings.players[0].id);
-// console.log(settings);
-
-settings.addPlayer();
-console.log(settings);
-
-settings.toggleImpostorCount();
-console.log(settings);
-
-settings.toggleImpostorCount();
-console.log(settings);
-
-settings.toggleImpostorCount();
-console.log(settings);
-
-settings.removePlayer(settings.players[0].id);
-console.log(settings);
-
-settings.setGameMode('Question Game');
-console.log(settings);
-
-settings.setGameMode('Charades');
-console.log(settings);
-
-settings.toggleCategory('People');
-console.log(settings);
-
-settings.toggleCategory('Places');
-console.log(settings);
-
-settings.toggleCategory('Food');
 console.log(settings);

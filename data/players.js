@@ -1,4 +1,4 @@
-import genId from '../utils/genId.js';
+import genId from '../scripts/utils/id.js';
 
 export let players;
 

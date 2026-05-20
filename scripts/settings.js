@@ -1,16 +1,23 @@
 import genId from './utils/id.js';
 
+import { players, savePlayersToStorage } from '../data/players.js';
+import {
+  impostorCount,
+  saveImpostorCountToStorage,
+} from '../data/impostors.js';
+import { gameMode, savegameModeToStorage } from '../data/game-mode.js';
+
 /**
  * Settings.
  * Default game mode is 'Word Game'.
  * @class
  */
 export class Settings {
-  constructor(gameMode, selectedCategories, players) {
+  constructor(gameMode, selectedCategories, players, impostorCount) {
     this.gameMode = gameMode;
     this.selectedCategories = selectedCategories;
     this.players = players;
-    this.impostorCount = 1; // Temporary default val; will be updated based on localStorage.
+    this.impostorCount = impostorCount;
   }
 
   /**
@@ -96,6 +103,11 @@ export class Settings {
   }
 }
 
-function genSettings(gameMode, selectedCategories, players) {
-  return new Settings(gameMode, selectedCategories, players);
+export function genSettings(
+  gameMode,
+  selectedCategories,
+  players,
+  impostorCount,
+) {
+  return new Settings(gameMode, selectedCategories, players, impostorCount);
 }
