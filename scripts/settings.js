@@ -56,7 +56,7 @@ export class Settings {
   }
 
   /**
-   * Toggles the impostor count. MAKE SURE THAT IMPOSTOR COUNT UPDATES WHEN PLAYER COUNT IS UPDATED.
+   * Toggles the impostor count.
    * @returns
    */
   toggleImpostorCount() {
