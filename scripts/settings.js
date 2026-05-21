@@ -1,9 +1,17 @@
 import genId from './utils/id.js';
 
-import { players, savePlayersToStorage } from '../data/players.js';
+import {
+  players,
+  savePlayersToStorage,
+  addPlayer,
+  removePlayer,
+  editPlayerName,
+} from '../data/players.js';
 import {
   impostorCount,
   saveImpostorCountToStorage,
+  updateImpostorCountOnRemovePlayer,
+  toggleImpostorCount,
 } from '../data/impostors.js';
 import { gameMode, savegameModeToStorage } from '../data/game-mode.js';
 
@@ -25,10 +33,8 @@ export class Settings {
    * @returns
    */
   addPlayer() {
-    this.players.push({
-      name: `Player ${this.players.length + 1}`,
-      id: genId(),
-    });
+    addPlayer();
+    this.players = players;
     return true;
   }
 
@@ -38,12 +44,13 @@ export class Settings {
    * @returns
    */
   removePlayer(playerId) {
-    this.players = this.players.filter((player) => player.id !== playerId);
+    const ok = removePlayer(playerId);
+    if (!ok) return false;
+    this.players = players;
 
     // Update impostor count if player count is less than or equal to impostor count.
-    if (this.players.length <= this.impostorCount) {
-      this.impostorCount = this.players.length - 1;
-    }
+    updateImpostorCountOnRemovePlayer();
+    this.impostorCount = impostorCount;
     return true;
   }
 
@@ -54,12 +61,10 @@ export class Settings {
    * @returns
    */
   editPlayerName(playerId, newName) {
-    const player = this.players.find((player) => player.id === playerId);
-    if (player) {
-      player.name = newName;
-      return true;
-    }
-    return false;
+    const ok = editPlayerName(playerId, newName);
+    if (!ok) return false;
+    this.players = players;
+    return true;
   }
 
   /**

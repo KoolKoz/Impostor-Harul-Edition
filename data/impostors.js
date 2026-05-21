@@ -1,3 +1,5 @@
+import { players } from './players.js';
+
 export let impostorCount;
 
 loadImpostorCountFromStorage();
@@ -13,3 +15,12 @@ export function loadImpostorCountFromStorage() {
 export function saveImpostorCountToStorage() {
   localStorage.setItem('impostorCount', JSON.stringify(impostorCount));
 }
+
+export function updateImpostorCountOnRemovePlayer() {
+  if (players.length <= impostorCount) {
+    impostorCount = players.length - 1;
+    saveImpostorCountToStorage();
+  }
+}
+
+export function toggleImpostorCount() {}

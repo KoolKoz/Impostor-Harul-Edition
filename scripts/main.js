@@ -15,3 +15,15 @@ const settings = genSettings(
   impostorCount,
 );
 console.log(settings);
+
+settings.toggleImpostorCount();
+console.log(settings);
+
+settings.removePlayer(players[0].id);
+console.log(settings);
+
+settings.addPlayer();
+console.log(settings);
+
+settings.removePlayer(players[3].id);
+console.log(settings);
