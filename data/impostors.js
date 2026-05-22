@@ -20,7 +20,19 @@ export function updateImpostorCountOnRemovePlayer() {
   if (players.length <= impostorCount) {
     impostorCount = players.length - 1;
     saveImpostorCountToStorage();
+    return true;
   }
+  return false;
 }
 
-export function toggleImpostorCount() {}
+export function toggleImpostorCount() {
+  const currentImpostorCount = impostorCount;
+
+  if (currentImpostorCount >= players.length - 1) {
+    impostorCount = 1;
+  } else {
+    impostorCount = currentImpostorCount + 1;
+  }
+  saveImpostorCountToStorage();
+  return true;
+}

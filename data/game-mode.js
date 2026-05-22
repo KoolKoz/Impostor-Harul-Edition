@@ -1,8 +1,8 @@
 export let gameMode; // Possible game modes: 'Word Game', 'Question Game', 'Charades'.
 
-loadgameModeFromStorage();
+loadGameModeFromStorage();
 
-export function loadgameModeFromStorage() {
+export function loadGameModeFromStorage() {
   gameMode = localStorage.getItem('gameMode');
 
   if (!gameMode) {
@@ -10,6 +10,12 @@ export function loadgameModeFromStorage() {
   }
 }
 
-export function savegameModeToStorage() {
+export function saveGameModeToStorage() {
   localStorage.setItem('gameMode', JSON.stringify(gameMode));
+}
+
+export function setGameMode(gameMode) {
+  gameMode = gameMode;
+  saveGameModeToStorage();
+  return true;
 }

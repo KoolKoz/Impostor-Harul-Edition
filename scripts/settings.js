@@ -13,7 +13,8 @@ import {
   updateImpostorCountOnRemovePlayer,
   toggleImpostorCount,
 } from '../data/impostors.js';
-import { gameMode, savegameModeToStorage } from '../data/game-mode.js';
+import { gameMode, saveGameModeToStorage } from '../data/game-mode.js';
+import { selectedCategories, toggleCategory } from '../data/categories.js';
 
 /**
  * Settings.
@@ -72,13 +73,8 @@ export class Settings {
    * @returns
    */
   toggleImpostorCount() {
-    let currentImpostorCount = this.impostorCount;
-
-    if (currentImpostorCount >= this.players.length - 1) {
-      this.impostorCount = 1;
-    } else {
-      this.impostorCount = currentImpostorCount + 1;
-    }
+    toggleImpostorCount();
+    this.impostorCount = impostorCount;
     return true;
   }
 
@@ -87,7 +83,8 @@ export class Settings {
    * @param {*} gameMode
    * @returns
    */
-  setGameMode(gameMode) {
+  setGameMode(selectedGameMode) {
+    setGameMode(selectedGameMode);
     this.gameMode = gameMode;
     return true;
   }
@@ -97,17 +94,20 @@ export class Settings {
    * @param {*} category
    */
   toggleCategory(category) {
-    if (this.selectedCategories.includes(category)) {
-      this.selectedCategories = this.selectedCategories.filter(
-        (cat) => cat !== category,
-      );
-    } else {
-      this.selectedCategories.push(category);
-    }
+    toggleCategory(category);
+    this.selectedCategories = selectedCategories;
     return true;
   }
 }
 
+/**
+ * Generate settings object.
+ * @param {*} gameMode
+ * @param {*} selectedCategories
+ * @param {*} players
+ * @param {*} impostorCount
+ * @returns
+ */
 export function genSettings(
   gameMode,
   selectedCategories,

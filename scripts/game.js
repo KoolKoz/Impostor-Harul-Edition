@@ -1,5 +1,5 @@
 /**
- * Represents a game session with players, impostors, and non-impostors.
+ * Represents a game session with players, impostors, and non-impostors. WIP
  * Default amount of players is 3.
  * @class
  */

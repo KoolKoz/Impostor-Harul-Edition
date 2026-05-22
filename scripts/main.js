@@ -5,12 +5,13 @@ import {
   impostorCount,
   saveImpostorCountToStorage,
 } from '../data/impostors.js';
-import { gameMode, savegameModeToStorage } from '../data/game-mode.js';
+import { gameMode, saveGameModeToStorage } from '../data/game-mode.js';
+import { selectedCategories } from '../data/categories.js';
 
 //Debugging.
 const settings = genSettings(
   gameMode,
-  ['Animals', 'Food'],
+  selectedCategories,
   players,
   impostorCount,
 );
@@ -26,4 +27,10 @@ settings.addPlayer();
 console.log(settings);
 
 settings.removePlayer(players[3].id);
+console.log(settings);
+
+settings.removePlayer(players[2].id);
+console.log(settings);
+
+settings.toggleCategory('Animals');
 console.log(settings);
