@@ -4,13 +4,33 @@
  * @class
  */
 class Game {
-  constructor(gameMode, selectedCategories = []) {
+  constructor(gameMode, selectedCategories, players) {
     this.gameMode = gameMode;
     this.selectedCategories = selectedCategories;
-    this.players = [];
+    this.players = players;
     this.impostors = [];
     this.nonImpostors = [];
   }
+
+  /**
+   * Selects impostors for the game session based on impostor count.
+   * @param {number} impostorCount
+   */
+  selectImpostors(impostorCount) {
+    // Randomly select impostors from the players array based on the impostor count.
+    const shuffledPlayers = this.players.sort(() => 0.5 - Math.random());
+    this.impostors = shuffledPlayers.slice(0, impostorCount);
+    this.nonImpostors = shuffledPlayers.slice(impostorCount);
+  }
 }
 
-function genGame(gameMode, selectedCategories) {}
+/**
+ * Generate game session.
+ * @param {string} gameMode
+ * @param {*} selectedCategories
+ * @param {*} players
+ * @returns
+ */
+export function genGame(gameMode, selectedCategories, players) {
+  return new Game(gameMode, selectedCategories, players);
+}

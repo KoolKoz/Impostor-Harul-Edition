@@ -1,4 +1,5 @@
-import { Settings, genSettings } from './settings.js';
+import { genSettings } from './settings.js';
+import { genGame } from './game.js';
 
 import { players, savePlayersToStorage } from '../data/players.js';
 import {
@@ -17,20 +18,12 @@ const settings = genSettings(
 );
 console.log(settings);
 
-settings.toggleImpostorCount();
-console.log(settings);
+const game = genGame(
+  settings.gameMode,
+  settings.selectedCategories,
+  settings.players,
+);
+console.log(game);
 
-settings.removePlayer(players[0].id);
-console.log(settings);
-
-settings.addPlayer();
-console.log(settings);
-
-settings.removePlayer(players[3].id);
-console.log(settings);
-
-settings.removePlayer(players[2].id);
-console.log(settings);
-
-settings.toggleCategory('Animals');
-console.log(settings);
+game.selectImpostors(settings.impostorCount);
+console.log(game);
