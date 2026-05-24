@@ -116,3 +116,5 @@ export function genSettings(
 ) {
   return new Settings(gameMode, selectedCategories, players, impostorCount);
 }
+
+export function renderSettings() {}

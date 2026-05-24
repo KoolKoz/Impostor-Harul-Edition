@@ -1,0 +1,87 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 360px;
+    margin: 10px auto;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    color:var(--text-muted);
+    font-weight: bold;
+
+    background-color: var(--container-bg);
+    border: 1px solid var(--container-border);
+    border-radius: 4px;
+
+    box-shadow: var(--box-shadow);
+}
+
+.settings-btn-container { /* NEEDS TO BE UPDATED TO BEGIN NEW ROW AFTER MORE THAN 2 BUTTONS! */
+    display: flex;
+    justify-content: center;
+
+    gap: 10px;
+    margin-top: 10px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.settings-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 100px;
+
+    background-color: var(--container-bg);
+    color: white;
+    border: 1px solid var(--container-border);
+    border-radius: 4px;
+    box-shadow: var(--btn-shadow);
+    
+    transition: background-color .15s
+}
+
+.settings-btn:hover {
+    background-color: var(--container-hover);
+}
+
+.top-text {
+    margin-bottom: 8px;
+
+    font-size: 16px;
+    color: var(--text-muted);
+}
+
+.bottom-text {
+    color: var(--text-main);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.input-field {
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: center;
+  width: 100%;
+  font-family: inherit;
+  font-size: 20px; /* Match .bottom-text font size */
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+
+  pointer-events: none;
+}
+
+.input-field::-webkit-inner-spin-button,
+.input-field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

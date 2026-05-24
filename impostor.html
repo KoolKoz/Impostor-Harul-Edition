@@ -4,8 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Impostor: Harul Edition</title>
+
+    <!-- Import CSS. -->
+    <link rel="stylesheet" href="styles/shared/general.css" />
+    <link rel="stylesheet" href="styles/pages/impostor.css" />
   </head>
   <body>
+    <h1>Impostor: Harul Edition</h1>
+    <main>
+      <div class="container">
+        <h2>Players</h2>
+        <div class="settings-btn-container">
+          <button id="players-btn" class="settings-btn">
+            <span class="top-text">Players</span>
+            <span class="bottom-text">3</span>
+          </button>
+          <button id="impostors-btn" class="settings-btn">
+            <span class="top-text">Impostors</span>
+            <input
+              type="number"
+              class="bottom-text input-field"
+              value="1"
+              min="1"
+              max="3"
+            />
+          </button>
+        </div>
+        <h2>Game Mode</h2>
+        <div class="settings-btn-container">
+          <button id="word" class="settings-btn">
+            <span class="bottom-text selected">Word Game</span>
+          </button>
+          <button id="question" class="settings-btn">
+            <span class="bottom-text">Question Game</span>
+          </button>
+        </div>
+      </div>
+    </main>
     <script type="module" src="./data/players.js"></script>
     <script type="module" src="./data/impostors.js"></script>
     <script type="module" src="./data/game-mode.js"></script>
