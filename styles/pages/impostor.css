@@ -9,6 +9,7 @@
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    padding-bottom: 20px;
 
     color:var(--text-muted);
     font-weight: bold;
@@ -66,22 +67,113 @@
 }
 
 .input-field {
-  background: transparent;
-  border: none;
-  color: white;
-  text-align: center;
-  width: 100%;
-  font-family: inherit;
-  font-size: 20px; /* Match .bottom-text font size */
-  font-weight: bold;
-  outline: none;
-  cursor: pointer;
+    background: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-family: inherit;
+    font-size: 20px; /* Match .bottom-text font size */
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
 
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .input-field::-webkit-inner-spin-button,
 .input-field::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.players-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    /* Stretch children to fill the container width */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.player-name {
+  /* Structure */
+    display: flex;
+    justify-content: space-between; /* Pushes name left, X right */
+    align-items: center;            /* Keeps them vertically centered */
+    text-align: left; 
+    
+    padding: 15px;
+    text-align: center;
+
+    /* Visual - matching your .settings-btn and .container style */
+    background-color: var(--container-bg);
+    color: white;
+    border: 1px solid var(--container-border);
+    border-radius: 4px;
+
+    box-shadow: 0 5px 10px rgba(54, 54, 54, 0.5);
+
+    /* Text */
+    font-size: 18px;
+    transition: all 0.15s ease;
+}
+
+.player-name:hover {
+    background-color: var(--container-hover);
+}
+
+.delete {
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+.add-player-btn {
+    width: 100%;
+}
+
+.pink-btn {
+    /*Structure*/
+    padding: 12px 24px;
+
+    /*Text*/
+    font-weight: bold;
+    text-transform: uppercase;
+
+    /*Visual*/
+    background-color: transparent;
+    color: #ffbef6; 
+    border: 2px solid #ffbef6;
+    border-radius: 4px;
+    box-shadow: 0 0 8px #ff00ff;
+
+    /*Animation*/
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pink-btn:hover {
+    /*Visual*/
+    background-color: #ffbef6; 
+    color: #100e1b;
+    box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+
+    /*Animation*/
+    transform: translateY(-2px);
+}
+
+.pink-btn:active {
+    /*Visual*/
+    box-shadow: 0 0 10px #ff00ff;
+
+    /*Animation*/
+    transform: translateY(1px);
+}
+
+.pink-btn text {
+    /*Visual*/
+    color: #ffbef6;
 }

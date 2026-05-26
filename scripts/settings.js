@@ -6,6 +6,7 @@ import {
   addPlayer,
   removePlayer,
   editPlayerName,
+  renderPlayersTab,
 } from '../data/players.js';
 import {
   impostorCount,
@@ -13,7 +14,11 @@ import {
   updateImpostorCountOnRemovePlayer,
   toggleImpostorCount,
 } from '../data/impostors.js';
-import { gameMode, saveGameModeToStorage } from '../data/game-mode.js';
+import {
+  gameMode,
+  saveGameModeToStorage,
+  setGameMode,
+} from '../data/game-mode.js';
 import { selectedCategories, toggleCategory } from '../data/categories.js';
 
 /**
@@ -75,6 +80,7 @@ export class Settings {
   toggleImpostorCount() {
     toggleImpostorCount();
     this.impostorCount = impostorCount;
+    renderSettings(this);
     return true;
   }
 
@@ -117,4 +123,60 @@ export function genSettings(
   return new Settings(gameMode, selectedCategories, players, impostorCount);
 }
 
-export function renderSettings() {}
+export function renderSettings(settings) {
+  let settingsHTML = `
+    <h2>Players</h2>
+      <div class="settings-btn-container">
+        <button id="players-btn" class="settings-btn">
+          <span class="top-text">Players</span>
+          <span class="bottom-text">${settings.players.length}</span>
+        </button>
+        <button id="impostors-btn" class="settings-btn">
+          <span class="top-text">Impostors</span>
+          <input
+            type="number"
+            class="bottom-text input-field"
+            value="${settings.impostorCount}"
+            min="1"
+            max="3"
+          />
+        </button>
+      </div>
+      <h2>Game Mode</h2>
+      <div class="settings-btn-container">
+        <button id="word-btn" class="settings-btn">
+          <span class="bottom-text selected">Word Game</span>
+        </button>
+        <button id="question-btn" class="settings-btn">
+          <span class="bottom-text">Question Game</span>
+        </button>
+      </div>
+      <h2>Categories</h2>
+      <div class="settings-btn-container">
+        <button id="categories-btn" class="settings-btn">
+          <span class="bottom-text selected">Show Categories</span>
+        </button>
+      </div>
+  `;
+
+  const settingsContainer = document.getElementById('settings');
+  settingsContainer.innerHTML = settingsHTML;
+
+  const footer = document.getElementById('footer');
+  footer.innerHTML = `
+    <button id="start-btn" class="pink-btn">Start</button>
+  `;
+
+  ////// Event listeners. \\\\\\
+
+  document.getElementById('players-btn').addEventListener('click', () => {
+    renderPlayersTab(settings);
+  });
+
+  document.getElementById('impostors-btn').addEventListener('click', () => {
+    settings.toggleImpostorCount();
+
+    // Debugging.
+    console.log(settings);
+  });
+}

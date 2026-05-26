@@ -1,4 +1,4 @@
-import { genSettings } from './settings.js';
+import { genSettings, renderSettings } from './settings.js';
 import { genGame } from './game.js';
 
 import { players, savePlayersToStorage } from '../data/players.js';
@@ -9,8 +9,8 @@ import {
 import { gameMode, saveGameModeToStorage } from '../data/game-mode.js';
 import { selectedCategories } from '../data/categories.js';
 
-//Debugging.
-const settings = genSettings(
+// Debugging.
+export const settings = genSettings(
   gameMode,
   selectedCategories,
   players,
@@ -18,12 +18,14 @@ const settings = genSettings(
 );
 console.log(settings);
 
-const game = genGame(
-  settings.gameMode,
-  settings.selectedCategories,
-  settings.players,
-);
-console.log(game);
+renderSettings(settings);
 
-game.selectImpostors(settings.impostorCount);
-console.log(game);
+// const game = genGame(
+//   settings.gameMode,
+//   settings.selectedCategories,
+//   settings.players,
+// );
+// console.log(game);
+
+// game.selectImpostors(settings.impostorCount);
+// console.log(game);
