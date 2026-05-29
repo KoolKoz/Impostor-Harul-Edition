@@ -21,6 +21,8 @@ import {
 } from '../data/game-mode.js';
 import { selectedCategories, toggleCategory } from '../data/categories.js';
 
+import { genGame, renderGame } from './game.js';
+
 /**
  * Settings.
  * Default game mode is 'Word Game'.
@@ -159,7 +161,7 @@ export function renderSettings(settings) {
       </div>
   `;
 
-  const settingsContainer = document.getElementById('settings');
+  const settingsContainer = document.getElementById('main');
   settingsContainer.innerHTML = settingsHTML;
 
   const footer = document.getElementById('footer');
@@ -198,5 +200,19 @@ export function renderSettings(settings) {
 
     // Debugging.
     console.log(settings);
+  });
+
+  document.getElementById('start-btn').addEventListener('click', () => {
+    const game = genGame(
+      settings.gameMode,
+      settings.selectedCategories,
+      settings.players,
+    );
+    renderGame(game);
+    game.selectImpostors(settings.impostorCount);
+    game.selectWord(settings.selectedCategories);
+
+    // Debugging.
+    console.log(game);
   });
 }

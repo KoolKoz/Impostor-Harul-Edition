@@ -90,7 +90,7 @@
 .players-list {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
+    margin: 20px 0 0;
     /* Stretch children to fill the container width */
     width: 100%;
     display: flex;
@@ -132,11 +132,17 @@
 }
 
 .add-player-btn {
+    margin-top: 20px;
     width: 100%;
 }
 
 .settings-btn.selected .bottom-text {
     color: var(--selected);
+}
+
+.player-item.greyed-out .player-name {
+    color: var(--text-muted);
+    opacity: 0.6;
 }
 
 .pink-btn {

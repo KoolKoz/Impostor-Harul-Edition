@@ -47,7 +47,7 @@ export function editPlayerName(playerId, newName) {
 }
 
 export function renderPlayersTab(settings) {
-  let playersListHTML = settings.players
+  let playersListHTML = settings.players // REMEMBER TO MAKE THE PLAYER NAME AN INPUT SO YOU CAN CHANGE IT!!!
     .map(
       (player) => `
         <li class="player-item" data-id="${player.id}">
@@ -67,8 +67,8 @@ export function renderPlayersTab(settings) {
     <button id="add-player-btn" class="pink-btn add-player-btn">+</button>
   `;
 
-  const settingsContainer = document.getElementById('settings');
-  settingsContainer.innerHTML = playersHTML;
+  const playersContainer = document.getElementById('main');
+  playersContainer.innerHTML = playersHTML;
 
   const footer = document.getElementById('footer');
   footer.innerHTML = `
