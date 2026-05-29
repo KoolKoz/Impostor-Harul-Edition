@@ -145,6 +145,14 @@
     opacity: 0.6;
 }
 
+.player-word {
+    color: rgb(98, 255, 98);
+}
+
+.impostor-word {
+    color: rgb(255, 94, 94);
+}
+
 .pink-btn {
     /*Structure*/
     padding: 12px 24px;

@@ -211,6 +211,7 @@ export function renderSettings(settings) {
     renderGame(game);
     game.selectImpostors(settings.impostorCount);
     game.selectWord(settings.selectedCategories);
+    game.selectStartingPlayer();
 
     // Debugging.
     console.log(game);

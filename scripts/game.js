@@ -12,6 +12,8 @@ class Game {
     this.players = players;
     this.impostors = [];
     this.nonImpostors = [];
+    this.selectedPlayers = [];
+    this.startingPlayer;
     this.word = '';
   }
 
@@ -21,13 +23,23 @@ class Game {
    */
   selectImpostors(impostorCount) {
     // Randomly select impostors from the players array based on the impostor count.
-    const shuffledPlayers = this.players.sort(() => 0.5 - Math.random());
+    const shuffledPlayers = [...this.players].sort(() => 0.5 - Math.random());
     this.impostors = shuffledPlayers.slice(0, impostorCount);
     this.nonImpostors = shuffledPlayers.slice(impostorCount);
   }
 
   selectWord(selectedCategories) {
     this.word = selectWord(selectedCategories);
+  }
+
+  addSelectedPlayer(playerId) {
+    const player = this.players.find((p) => p.id === playerId);
+    this.selectedPlayers.push(player);
+  }
+
+  selectStartingPlayer() {
+    const randomIndex = Math.floor(Math.random() * this.players.length);
+    this.startingPlayer = this.players[randomIndex];
   }
 }
 
@@ -43,15 +55,22 @@ export function genGame(gameMode, selectedCategories, players) {
 }
 
 export function renderGame(game) {
+  if (game.selectedPlayers.length === game.players.length) {
+    // All players have selected their words/impostor status, render the final screen.
+    renderInstructions(game);
+    return;
+  }
+
   let playersListHTML = game.players
-    .map(
-      (player) => `
-        <li class="player-item js-player-item" data-id="${player.id}">
+    .map((player) => {
+      const isSelected = game.selectedPlayers.some((p) => p.id === player.id);
+      return `
+        <li class="player-item js-player-item ${isSelected ? 'greyed-out' : ''}" data-id="${player.id}">
           <span class="player-name">${player.name}
           </span>
         </li>
-      `,
-    )
+      `;
+    })
     .join('');
 
   let gameHTML = `
@@ -65,9 +84,7 @@ export function renderGame(game) {
   gameContainer.innerHTML = gameHTML;
 
   const footer = document.getElementById('footer');
-  footer.innerHTML = `
-    <button id="reveal-impostor-btn" class="pink-btn">Reveal Impostor</button>
-  `;
+  footer.innerHTML = ``;
 
   ///// Event listeners. \\\\\\
   document.querySelectorAll('.js-player-item').forEach((item) => {
@@ -75,28 +92,28 @@ export function renderGame(game) {
       return;
     }
     item.addEventListener('click', () => {
-      renderWord(game);
+      renderWord(game, item.dataset.id);
+      game.addSelectedPlayer(item.dataset.id);
     });
   });
 }
 
-// Do this after all players are selected.
+function renderWord(game, playerId) {
+  const isImpostor = game.impostors.some(
+    (impostor) => impostor.id === playerId,
+  );
 
-// const footer = document.getElementById('footer');
-//   footer.innerHTML = `
-//     <button id="reveal-impostor-btn" class="pink-btn">Reveal Impostor</button>
-//   `;
-
-function renderWord(game) {
   let wordHTML = `
-    <h2>Your word is:</h2>
+    <h2>Category:</h2>
+    <span class="bottom-text" style="margin-bottom: 20px">Example</span>
+    <h2>${isImpostor ? 'You are the' : 'Your word is:'}</h2>
     <div class="word-container">
-      <span class="word">${game.word}</span>
+      <span class="bottom-text ${isImpostor ? 'impostor-word' : 'player-word'}">${isImpostor ? 'Impostor' : game.word}</span>
     </div>
-  `;
+    `;
 
-  const gameContainer = document.getElementById('main');
-  gameContainer.innerHTML = wordHTML;
+  const wordContainer = document.getElementById('main');
+  wordContainer.innerHTML = wordHTML;
 
   const footer = document.getElementById('footer');
   footer.innerHTML = `
@@ -108,4 +125,16 @@ function renderWord(game) {
   document.getElementById('back-btn').addEventListener('click', () => {
     renderGame(game);
   });
+}
+
+function renderInstructions(game) {
+  const instructionsContainer = document.getElementById('main');
+  instructionsContainer.innerHTML = `<h2>Instructions</h2><p>Welcome to the game!</p>`;
+
+  const footer = document.getElementById('footer');
+  footer.innerHTML = `
+    <button id="reveal-impostor-btn" class="pink-btn">Reveal Impostor</button>
+  `;
+
+  console.log('Instructions');
 }
