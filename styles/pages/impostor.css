@@ -99,7 +99,7 @@
     gap: 10px;
 }
 
-.player-name {
+.players-list li {
   /* Structure */
     display: flex;
     justify-content: space-between; /* Pushes name left, X right */
@@ -122,7 +122,7 @@
     transition: all 0.15s ease;
 }
 
-.player-name:hover {
+.players-list li:hover {
     background-color: var(--container-hover);
 }
 
@@ -134,6 +134,18 @@
 .add-player-btn {
     margin-top: 20px;
     width: 100%;
+}
+
+.player-name-input {
+    background: transparent;
+    border: none;
+    color: white;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+    font-size: 18px; /* Match .players-list li font size */
+    font-weight: bold;
+    outline: none;
 }
 
 .settings-btn.selected .bottom-text {

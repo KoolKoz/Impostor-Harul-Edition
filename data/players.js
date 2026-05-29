@@ -51,9 +51,8 @@ export function renderPlayersTab(settings) {
     .map(
       (player) => `
         <li class="player-item" data-id="${player.id}">
-          <span class="player-name">${player.name}
+          <input type="text" class="player-name-input" value="${player.name}" data-player-id="${player.id}" />
           <span data-id="${player.id}" class="delete js-delete">&times;</span>
-          </span>
         </li>
       `,
     )
@@ -76,6 +75,18 @@ export function renderPlayersTab(settings) {
   `;
 
   ////// Event listeners. \\\\\\
+
+  document.querySelectorAll('.player-name-input').forEach((input) => {
+    input.addEventListener('blur', (event) => {
+      const playerId = event.target.dataset.playerId;
+      const newName = event.target.value.trim();
+
+      if (newName) {
+        settings.editPlayerName(playerId, newName);
+        renderPlayersTab(settings);
+      }
+    });
+  });
 
   document.getElementById('back-btn').addEventListener('click', () => {
     renderSettings(settings);
