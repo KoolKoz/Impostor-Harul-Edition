@@ -171,6 +171,7 @@
     color: var(--text-main);
     font-size: 16px;
     margin: 10px 0;
+    text-align: left;
 }
 
 .pink-btn {
@@ -214,4 +215,8 @@
 .pink-btn text {
     /*Visual*/
     color: #ffbef6;
+}
+
+#back-btn {
+    margin-bottom: 20px;
 }
