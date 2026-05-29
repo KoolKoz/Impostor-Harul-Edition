@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
     width: 90%;
     max-width: 360px;
     margin: 10px auto;
@@ -135,6 +134,7 @@
 
 .add-player-btn {
     margin-top: 20px;
+    margin-bottom: 0;
     width: 100%;
 }
 
