@@ -203,6 +203,10 @@ export function renderSettings(settings) {
   });
 
   document.getElementById('start-btn').addEventListener('click', () => {
+    const header = document.getElementById('header');
+    header.classList.remove('h1-fade-in');
+    header.classList.add('h1-fade-out');
+
     const game = genGame(
       settings.gameMode,
       settings.selectedCategories,

@@ -162,6 +162,10 @@ function renderImpostor(game, settings) {
   ////// Event listeners. \\\\\\
 
   document.getElementById('back-btn').addEventListener('click', () => {
+    const header = document.getElementById('header');
+    header.classList.remove('h1-fade-out');
+    header.classList.add('h1-fade-in');
+
     renderSettings(settings);
   });
 }

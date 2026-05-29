@@ -19,6 +19,8 @@
     border-radius: 4px;
 
     box-shadow: var(--box-shadow);
+
+    -webkit-overflow-scrolling: touch;
 }
 
 .settings-btn-container { /* NEEDS TO BE UPDATED TO BEGIN NEW ROW AFTER MORE THAN 2 BUTTONS! */
