@@ -1,4 +1,5 @@
-import { selectWord } from '../data/categories.js';
+import { selectCategory, selectWord } from '../data/categories.js';
+import { renderSettings } from './settings.js';
 
 /**
  * Represents a game session with players, impostors, and non-impostors. WIP
@@ -9,12 +10,13 @@ class Game {
   constructor(gameMode, selectedCategories, players) {
     this.gameMode = gameMode;
     this.selectedCategories = selectedCategories;
+    this.selectedCategory = selectCategory(selectedCategories);
     this.players = players;
     this.impostors = [];
     this.nonImpostors = [];
     this.selectedPlayers = [];
-    this.startingPlayer;
-    this.word = '';
+    this.startingPlayer = this.selectStartingPlayer();
+    this.word = selectWord(this);
   }
 
   /**
@@ -28,10 +30,6 @@ class Game {
     this.nonImpostors = shuffledPlayers.slice(impostorCount);
   }
 
-  selectWord(selectedCategories) {
-    this.word = selectWord(selectedCategories);
-  }
-
   addSelectedPlayer(playerId) {
     const player = this.players.find((p) => p.id === playerId);
     this.selectedPlayers.push(player);
@@ -39,7 +37,7 @@ class Game {
 
   selectStartingPlayer() {
     const randomIndex = Math.floor(Math.random() * this.players.length);
-    this.startingPlayer = this.players[randomIndex];
+    return this.players[randomIndex];
   }
 }
 
@@ -54,10 +52,10 @@ export function genGame(gameMode, selectedCategories, players) {
   return new Game(gameMode, selectedCategories, players);
 }
 
-export function renderGame(game) {
+export function renderGame(game, settings) {
   if (game.selectedPlayers.length === game.players.length) {
     // All players have selected their words/impostor status, render the final screen.
-    renderInstructions(game);
+    renderInstructions(game, settings);
     return;
   }
 
@@ -92,20 +90,20 @@ export function renderGame(game) {
       return;
     }
     item.addEventListener('click', () => {
-      renderWord(game, item.dataset.id);
+      renderWord(game, item.dataset.id, settings);
       game.addSelectedPlayer(item.dataset.id);
     });
   });
 }
 
-function renderWord(game, playerId) {
+function renderWord(game, playerId, settings) {
   const isImpostor = game.impostors.some(
     (impostor) => impostor.id === playerId,
   );
 
   let wordHTML = `
     <h2>Category:</h2>
-    <span class="bottom-text" style="margin-bottom: 20px">Example</span>
+    <span class="bottom-text" style="margin-bottom: 20px">${game.selectedCategory}</span>
     <h2>${isImpostor ? 'You are the' : 'Your word is:'}</h2>
     <div class="word-container">
       <span class="bottom-text ${isImpostor ? 'impostor-word' : 'player-word'}">${isImpostor ? 'Impostor' : game.word}</span>
@@ -117,24 +115,53 @@ function renderWord(game, playerId) {
 
   const footer = document.getElementById('footer');
   footer.innerHTML = `
-    <button id="back-btn" class="pink-btn">← Back</button>
+    <button id="back-btn" class="pink-btn">Got it!</button>
   `;
 
   ////// Event listeners. \\\\\\
 
   document.getElementById('back-btn').addEventListener('click', () => {
-    renderGame(game);
+    renderGame(game, settings);
   });
 }
 
-function renderInstructions(game) {
+function renderInstructions(game, settings) {
   const instructionsContainer = document.getElementById('main');
-  instructionsContainer.innerHTML = `<h2>Instructions</h2><p>Welcome to the game!</p>`;
+  instructionsContainer.innerHTML = `
+  <h2>Instructions</h2>
+  <p class="instructions">${game.startingPlayer.name} starts.</p>
+  <p class="instructions">Go clockwise.</p>
+  <p class="instructions">Say a word/phrase related to the secret word.</p>
+  <p class="instructions">Vote.</p>
+  `;
 
   const footer = document.getElementById('footer');
   footer.innerHTML = `
     <button id="reveal-impostor-btn" class="pink-btn">Reveal Impostor</button>
   `;
 
-  console.log('Instructions');
+  ////// Event listeners. \\\\\\
+
+  document
+    .getElementById('reveal-impostor-btn')
+    .addEventListener('click', () => {
+      renderImpostor(game, settings);
+    });
+}
+
+function renderImpostor(game, settings) {
+  const impostorContainer = document.getElementById('main');
+  impostorContainer.innerHTML = `
+    <h2>${game.impostors.length > 1 ? 'The impostors were:' : 'The impostor was:'}</h2>
+    <span class="bottom-text impostor-word">${game.impostors.map((impostor) => impostor.name).join(', ')}</span>
+    `;
+
+  const footer = document.getElementById('footer');
+  footer.innerHTML = `<button id="back-btn" class="pink-btn">← Back</button>`;
+
+  ////// Event listeners. \\\\\\
+
+  document.getElementById('back-btn').addEventListener('click', () => {
+    renderSettings(settings);
+  });
 }

@@ -43,15 +43,14 @@ export function toggleCategory(category) {
 }
 
 /**
- * Selects a random word from one of the selected categories.
+ * Selects a random category from the selected categories.
  * @param {Array<string>} selectedCats - Array of category names (e.g., ['People/Pets', 'Games'])
- * @returns {string|null} - A random word from a selected category, or null if no categories available
+ * @returns {string|null} - A random category key, or null if no categories available
  */
-export function selectWord(selectedCats) {
+export function selectCategory(selectedCats) {
   if (!selectedCats || selectedCats.length === 0) return null;
 
-  // Convert UI category names to JSON keys (e.g., 'People/Pets' -> 'people/pets')
-  const categoryKeys = selectedCats.map((cat) => cat.toLowerCase());
+  const categoryKeys = selectedCats;
 
   // Filter categories that exist in the data
   const availableCategories = categoryKeys.filter(
@@ -64,7 +63,18 @@ export function selectWord(selectedCats) {
   const randomCategoryIndex = Math.floor(
     Math.random() * availableCategories.length,
   );
-  const selectedCategory = availableCategories[randomCategoryIndex];
+  return availableCategories[randomCategoryIndex];
+}
+
+/**
+ * Selects a random word from one of the selected categories.
+ * @param {Array<string>} selectedCats - Array of category names (e.g., ['People/Pets', 'Games'])
+ * @returns {string|null} - A random word from a selected category, or null if no categories available
+ */
+export function selectWord(game) {
+  const selectedCategory = game.selectedCategory;
+
+  if (!selectedCategory) return null;
 
   // Get the words in that category
   const words = categoriesData[selectedCategory];

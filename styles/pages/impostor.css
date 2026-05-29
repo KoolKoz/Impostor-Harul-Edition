@@ -153,6 +153,12 @@
     color: rgb(255, 94, 94);
 }
 
+.instructions {
+    color: var(--text-main);
+    font-size: 16px;
+    margin: 10px 0;
+}
+
 .pink-btn {
     /*Structure*/
     padding: 12px 24px;

@@ -208,10 +208,8 @@ export function renderSettings(settings) {
       settings.selectedCategories,
       settings.players,
     );
-    renderGame(game);
+    renderGame(game, settings);
     game.selectImpostors(settings.impostorCount);
-    game.selectWord(settings.selectedCategories);
-    game.selectStartingPlayer();
 
     // Debugging.
     console.log(game);

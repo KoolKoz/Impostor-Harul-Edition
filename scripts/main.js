@@ -10,7 +10,7 @@ import { gameMode, saveGameModeToStorage } from '../data/game-mode.js';
 import { selectedCategories } from '../data/categories.js';
 
 // Debugging.
-export const settings = genSettings(
+const settings = genSettings(
   gameMode,
   selectedCategories,
   players,

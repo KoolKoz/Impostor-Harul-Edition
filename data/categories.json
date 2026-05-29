@@ -1,5 +1,5 @@
 {
-    "people/pets": [
+    "People/Pets": [
         "Dana",
         "Sarah Molin",
         "Sara Chirla",
@@ -38,7 +38,7 @@
         "Benji",
         "Coco"
     ],
-    "games": [
+    "Games": [
         "CS2",
         "Minecraft",
         "Roblox",
@@ -47,7 +47,7 @@
         "Subnautica",
         "Among Us"
     ],
-    "places" : [
+    "Places" : [
         "Harul",
         "Alex's house",
         "Noel's house",
@@ -60,12 +60,12 @@
         "Youth Room",
         "Cafeteria"
     ],
-    "objects": [
+    "Objects": [
         "Axe",
         "Knife",
-        ""
+        "Bat"
     ],
-    "animals": [
+    "Animals": [
         "Dog",
         "Cat",
         "Hamster",
