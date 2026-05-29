@@ -135,6 +135,10 @@
     width: 100%;
 }
 
+.settings-btn.selected .bottom-text {
+    color: var(--selected);
+}
+
 .pink-btn {
     /*Structure*/
     padding: 12px 24px;

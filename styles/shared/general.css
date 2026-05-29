@@ -9,6 +9,7 @@
     --text-muted: rgb(115, 115, 115);
     --box-shadow: 0 10px 20px rgba(54, 54, 54, 0.5); 
     --btn-shadow: 0 5px 10px rgba(54, 54, 54, 0.5);
+    --selected: rgb(160, 35, 149)
 }
 
 ::-webkit-scrollbar {

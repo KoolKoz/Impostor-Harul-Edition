@@ -86,7 +86,6 @@ export function renderPlayersTab(settings) {
     renderPlayersTab(settings);
   });
 
-  // Remove player listeners
   document.querySelectorAll('.js-delete').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       const playerId = e.currentTarget.dataset.id;

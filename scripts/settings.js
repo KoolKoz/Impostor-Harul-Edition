@@ -85,13 +85,13 @@ export class Settings {
   }
 
   /**
-   * Sets the game mode. Possible game modes: 'Word Game', 'Question Game', 'Charades'.
+   * Sets the game mode. Possible game modes: 'Word Game', 'Charades'.
    * @param {*} gameMode
    * @returns
    */
   setGameMode(selectedGameMode) {
     setGameMode(selectedGameMode);
-    this.gameMode = gameMode;
+    this.gameMode = selectedGameMode;
     return true;
   }
 
@@ -144,17 +144,17 @@ export function renderSettings(settings) {
       </div>
       <h2>Game Mode</h2>
       <div class="settings-btn-container">
-        <button id="word-btn" class="settings-btn">
-          <span class="bottom-text selected">Word Game</span>
+        <button id="word-btn" class="settings-btn ${settings.gameMode === 'Word Game' ? 'selected' : ''}">
+          <span class="bottom-text">Word Game</span>
         </button>
-        <button id="question-btn" class="settings-btn">
-          <span class="bottom-text">Question Game</span>
+        <button id="charades-btn" class="settings-btn ${settings.gameMode === 'Charades' ? 'selected' : ''}">
+          <span class="bottom-text">Charades</span>
         </button>
       </div>
       <h2>Categories</h2>
       <div class="settings-btn-container">
         <button id="categories-btn" class="settings-btn">
-          <span class="bottom-text selected">Show Categories</span>
+          <span class="bottom-text">Show Categories</span>
         </button>
       </div>
   `;
@@ -175,6 +175,26 @@ export function renderSettings(settings) {
 
   document.getElementById('impostors-btn').addEventListener('click', () => {
     settings.toggleImpostorCount();
+
+    // Debugging.
+    console.log(settings);
+  });
+
+  document.getElementById('word-btn').addEventListener('click', () => {
+    settings.setGameMode('Word Game');
+
+    document.getElementById('word-btn').classList.add('selected');
+    document.getElementById('charades-btn').classList.remove('selected');
+
+    // Debugging.
+    console.log(settings);
+  });
+
+  document.getElementById('charades-btn').addEventListener('click', () => {
+    settings.setGameMode('Charades');
+
+    document.getElementById('charades-btn').classList.add('selected');
+    document.getElementById('word-btn').classList.remove('selected');
 
     // Debugging.
     console.log(settings);
