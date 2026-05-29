@@ -129,10 +129,12 @@ function renderInstructions(game, settings) {
   const instructionsContainer = document.getElementById('main');
   instructionsContainer.innerHTML = `
   <h2>Instructions</h2>
+  <div class="instructions-divider">
   <p class="instructions">${game.startingPlayer.name} starts.</p>
   <p class="instructions">Go clockwise.</p>
   <p class="instructions">Say a word/phrase related to the secret word.</p>
   <p class="instructions">Vote.</p>
+  </div>
   `;
 
   const footer = document.getElementById('footer');
