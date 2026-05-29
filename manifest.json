@@ -1,7 +1,7 @@
 {
   "name": "Impostor: Harul Edition",
   "short_name": "Impostor",
-  "start_url": "impostor.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#020013",
   "theme_color": "#ffbef6",
