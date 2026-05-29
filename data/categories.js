@@ -21,6 +21,7 @@ export function loadSelectedCategoriesFromStorage() {
       'Places',
       'Objects',
       'Animals',
+      'Foods/Drinks',
     ];
   }
 }
