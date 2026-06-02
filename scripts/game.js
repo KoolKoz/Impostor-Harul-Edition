@@ -82,7 +82,9 @@ export function renderGame(game, settings) {
   gameContainer.innerHTML = gameHTML;
 
   const footer = document.getElementById('footer');
-  footer.innerHTML = ``;
+  footer.innerHTML = `
+    <button id="quit-btn" class="pink-btn">&times; Quit</button>
+  `;
 
   ///// Event listeners. \\\\\\
   document.querySelectorAll('.js-player-item').forEach((item) => {
@@ -93,6 +95,14 @@ export function renderGame(game, settings) {
       renderWord(game, item.dataset.id, settings);
       game.addSelectedPlayer(item.dataset.id);
     });
+  });
+
+  document.getElementById('quit-btn').addEventListener('click', () => {
+    const header = document.getElementById('header');
+    header.classList.remove('h1-fade-out');
+    header.classList.add('h1-fade-in');
+
+    renderSettings(settings);
   });
 }
 
@@ -130,8 +140,8 @@ function renderInstructions(game, settings) {
   instructionsContainer.innerHTML = `
   <h2>Instructions</h2>
   <div class="instructions-divider">
-  <p class="instructions">${game.startingPlayer.name} starts.</p>
-  <p class="instructions">Go clockwise.</p>
+  <p class="instructions"><u>${game.startingPlayer.name}</u> starts.</p>
+  <p class="instructions">Go <u>clockwise</u>.</p>
   <p class="instructions">Say a word/phrase related to the secret word.</p>
   <p class="instructions">Vote.</p>
   </div>

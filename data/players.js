@@ -47,7 +47,7 @@ export function editPlayerName(playerId, newName) {
 }
 
 export function renderPlayersTab(settings) {
-  let playersListHTML = settings.players // REMEMBER TO MAKE THE PLAYER NAME AN INPUT SO YOU CAN CHANGE IT!!!
+  let playersListHTML = settings.players
     .map(
       (player) => `
         <li class="player-item" data-id="${player.id}">
