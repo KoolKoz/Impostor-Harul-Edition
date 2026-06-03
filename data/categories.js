@@ -102,7 +102,7 @@ export async function renderCategoriesTab(settings) {
         `
         <li class="category-item js-category-item ${settings.selectedCategories.includes(category) ? '' : 'greyed-out'}" data-category="${category}">
           ${category}
-          <span class="toggle-indicator">${settings.selectedCategories.includes(category) ? '✓' : ''}</span>
+          <span class="toggle-indicator">${settings.selectedCategories.includes(category) ? '✓' : '&bull;'}</span>
         </li>
     `,
     )

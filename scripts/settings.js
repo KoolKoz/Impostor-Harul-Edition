@@ -207,6 +207,10 @@ export function renderSettings(settings) {
   });
 
   document.getElementById('start-btn').addEventListener('click', () => {
+    if (settings.selectedCategories.length === 0) {
+      alert('Please select at least one category before starting the game.');
+      return;
+    }
     const header = document.getElementById('header');
     header.classList.remove('h1-fade-in');
     header.classList.add('h1-fade-out');
@@ -223,7 +227,9 @@ export function renderSettings(settings) {
     console.log(game);
   });
 
-  document.getElementById('categories-btn').addEventListener('click', async () => {
-    await renderCategoriesTab(settings);
-  });
+  document
+    .getElementById('categories-btn')
+    .addEventListener('click', async () => {
+      await renderCategoriesTab(settings);
+    });
 }
