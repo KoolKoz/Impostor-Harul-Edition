@@ -88,7 +88,7 @@
     margin: 0;
 }
 
-.players-list {
+.players-list, .categories-list {
     list-style: none;
     padding: 0;
     margin: 20px 0 0;
@@ -100,7 +100,7 @@
     gap: 10px;
 }
 
-.players-list li {
+.players-list li, .categories-list li {
   /* Structure */
     display: flex;
     justify-content: space-between; /* Pushes name left, X right */
@@ -123,7 +123,7 @@
     transition: all 0.15s ease;
 }
 
-.players-list li:hover {
+.players-list li:hover, .categories-list li:hover {
     background-color: var(--container-hover);
 }
 
@@ -154,7 +154,7 @@
     color: var(--selected);
 }
 
-.player-item.greyed-out .player-name {
+.player-item.greyed-out .player-name, .category-item.greyed-out {
     color: var(--text-muted);
     opacity: 0.6;
 }

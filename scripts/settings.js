@@ -19,7 +19,11 @@ import {
   saveGameModeToStorage,
   setGameMode,
 } from '../data/game-mode.js';
-import { selectedCategories, toggleCategory } from '../data/categories.js';
+import {
+  selectedCategories,
+  toggleCategory,
+  renderCategoriesTab,
+} from '../data/categories.js';
 
 import { genGame, renderGame } from './game.js';
 
@@ -217,5 +221,9 @@ export function renderSettings(settings) {
 
     // Debugging.
     console.log(game);
+  });
+
+  document.getElementById('categories-btn').addEventListener('click', async () => {
+    await renderCategoriesTab(settings);
   });
 }

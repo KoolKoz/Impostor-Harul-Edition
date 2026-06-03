@@ -1,3 +1,5 @@
+import { renderSettings } from '../scripts/settings.js';
+
 let categoriesData;
 
 async function loadCategoriesData() {
@@ -21,7 +23,7 @@ export function loadSelectedCategoriesFromStorage() {
       'Places',
       'Objects',
       'Animals',
-      'Foods/Drinks',
+      // 'Foods/Drinks',
     ];
   }
 }
@@ -85,4 +87,64 @@ export function selectWord(game) {
   // Randomly select a word from the category
   const randomWordIndex = Math.floor(Math.random() * words.length);
   return words[randomWordIndex];
+}
+
+export async function renderCategoriesTab(settings) {
+  if (!categoriesData) {
+    await loadCategoriesData();
+  }
+
+  const categoryKeys = Object.keys(categoriesData || {});
+
+  const categoriesListHTML = categoryKeys
+    .map(
+      (category) =>
+        `
+        <li class="category-item js-category-item ${settings.selectedCategories.includes(category) ? '' : 'greyed-out'}" data-category="${category}">
+          ${category}
+          <span class="toggle-indicator">${settings.selectedCategories.includes(category) ? '✓' : ''}</span>
+        </li>
+    `,
+    )
+    .join('');
+
+  let categoriesHTML = `
+    <h2>Categories</h2>
+    <ul class="categories-list">
+      ${categoriesListHTML}
+    </ul>
+  `;
+
+  // let playersListHTML = settings.players
+  // .map(
+  //   (player) => `
+  //     <li class="player-item" data-id="${player.id}">
+  //       <input type="text" class="player-name-input" value="${player.name}" data-player-id="${player.id}" />
+  //       <span data-id="${player.id}" class="delete js-delete">&times;</span>
+  //     </li>
+  //   `,
+  // )
+  // .join('');
+
+  const categoriesContainer = document.getElementById('main');
+  categoriesContainer.innerHTML = categoriesHTML;
+
+  const footer = document.getElementById('footer');
+  footer.innerHTML = `
+    <button id="back-btn" class="pink-btn">← Back</button>
+  `;
+
+  ////// Event listeners. \\\\\\
+
+  document.querySelectorAll('.js-category-item').forEach((item) => {
+    item.addEventListener('click', () => {
+      const category = item.dataset.category;
+      settings.toggleCategory(category);
+      renderCategoriesTab(settings);
+    });
+  });
+
+  document.getElementById('back-btn').addEventListener('click', () => {
+    renderSettings(settings);
+  });
 }
